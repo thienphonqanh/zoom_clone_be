@@ -1,9 +1,9 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm'
 import { CreatedUpdated } from '../../common/createdUpdatedEntity'
 import { Room } from './room'
 import { Participants } from './participants'
 import { ScheduledMeetings } from './scheduledMeetings'
 import { Messages } from './messages'
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class Users extends CreatedUpdated {

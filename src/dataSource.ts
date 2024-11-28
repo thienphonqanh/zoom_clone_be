@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import 'reflect-metadata'
-
 import { DataSource } from 'typeorm'
+const fileExtension = __filename.endsWith('.ts') ? 'ts' : 'js'
 export const dataSource = new DataSource({
   type: 'postgres',
   host: `${process.env.HOST}`,
@@ -11,7 +11,7 @@ export const dataSource = new DataSource({
   database: `${process.env.DB_NAME}`,
   synchronize: true,
   logging: false,
-  entities: ['src/models/entity/**/*.ts'],
+  entities: [`${__dirname}/models/entity/**/*.${fileExtension}`],
   subscribers: [],
-  migrations: ['src/models/migrations/**/*.ts']
+  migrations: [`${__dirname}/models/migrations/**/*.${fileExtension}`]
 })

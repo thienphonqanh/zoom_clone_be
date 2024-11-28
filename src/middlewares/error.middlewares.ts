@@ -7,7 +7,6 @@ export const defaultErrorHandler = (error: Error, req: Request, res: Response, n
   if (error instanceof ErrorWithStatus) {
     return res.status(error.status).json(omit(error, ['status']))
   }
-
   Object.getOwnPropertyNames(error).forEach((key) => {
     Object.defineProperty(error, key, { enumerable: true })
   })

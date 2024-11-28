@@ -1,10 +1,10 @@
-import express, { Request, Response, NextFunction } from 'express'
-import { defaultErrorHandler } from './middlewares/error.middlewares'
-import { dataSource } from '~/dataSource'
+import express from 'express'
 import cors from 'cors'
 import authRouters from './routes/auth.routes'
 import userRouters from './routes/user.routes'
 import roomRouters from './routes/room.routes'
+import { defaultErrorHandler } from './middlewares/error.middlewares'
+import { dataSource } from './dataSource'
 const app = express()
 const port = 3111
 
@@ -23,8 +23,8 @@ dataSource
 app.use('/auth', authRouters)
 app.use('/users', userRouters)
 app.use('/rooms', roomRouters)
-
 app.use(defaultErrorHandler)
+
 app.listen(port, () => {
   console.log(`Port: ${port}`)
 })

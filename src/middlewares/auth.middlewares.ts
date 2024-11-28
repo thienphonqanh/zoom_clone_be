@@ -1,6 +1,5 @@
 import { body, check, matchedData } from 'express-validator'
 import HTTP_STATUS from '~/constants/httpStatus'
-import { dataSource } from '~/dataSource'
 import { Users } from '~/models/entity/users'
 import { ErrorWithStatus } from '~/models/Errors'
 import { hashPassword } from '~/util/crypto'
@@ -9,6 +8,7 @@ import { Request } from 'express'
 import { verifyToken } from '~/util/jwt'
 import { RefreshToken } from '~/models/entity/refreshToken'
 import { AUTH_MESSAGES } from '~/constants/messages'
+import { dataSource } from '~/dataSource'
 
 export const loginValidator = validate([
   body('email').isEmail().withMessage(AUTH_MESSAGES.EMAIL_IS_INVALID),

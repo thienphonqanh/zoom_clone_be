@@ -2,8 +2,6 @@ import { body } from 'express-validator'
 import { validate } from '~/util/validate'
 import { ErrorWithStatus } from '~/models/Errors'
 import HTTP_STATUS from '~/constants/httpStatus'
-import { dataSource } from '~/dataSource'
-import { Room } from '~/models/entity/room'
 import { AUTH_MESSAGES, USER_MESSAGES } from '~/constants/messages'
 
 export const updateMeValidator = validate([
