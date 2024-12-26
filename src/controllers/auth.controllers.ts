@@ -14,9 +14,9 @@ export const loginController = async (
   res: Response<ResponseDataType<LoginResponse>>,
   next: NextFunction
 ) => {
-  const { id, name } = req.user as Users
+  const { id, name, role } = req.user as Users
   if (id != undefined && name != undefined) {
-    const data: LoginResponse = await authServices.loginService({ id: id, name: name })
+    const data: LoginResponse = await authServices.loginService({ id: id, name: name, role: role as string })
     return res.json({
       message: AUTH_MESSAGES.LOGIN_SUCCESS,
       data

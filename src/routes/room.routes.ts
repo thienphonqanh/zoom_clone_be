@@ -27,7 +27,7 @@ roomRouters.get('/room', accessTokenValidator, wrapRequestHandler(getNewRoomIdCo
 /*  
     description: Check if this room_id exists 
     path: /rooms/room,
-    method: Post,
+    method: POST,
     body: { roomId: string }
 */
 roomRouters.post('/room', accessTokenValidator, checkRoomIdValidator, wrapRequestHandler(checkRoomIdController))

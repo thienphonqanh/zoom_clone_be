@@ -70,5 +70,29 @@ export const ROOM_MESSAGES = {
   ROOM_ID_MUST_BE_STRING: 'Room id phải là chuỗi',
   ROOM_ID_EXISTED: 'Phòng hợp lệ',
   ROOM_ID_NOT_EXISTED: 'Phòng không tồn tại',
+  DELETE_ROOM_SUCCESS: 'Xóa phòng thành công',
+  GET_ALL_ROOM_SUCCESS: 'Lấy phòng thành công'
+} as const
+
+export const SCHEDULE_MESSAGES = {
+  GET_ALL_SCHEDULE_SUCCESS: 'Lấy tất cả lịch trình thành công',
+  GET_SCHEDULE_SUCCESS: 'Lấy lịch trình thành công',
+  CREATE_SCHEDULE_SUCCESS: 'Tạo lịch trình thành công',
+  UPDATE_SCHEDULE_SUCCESS: 'Cập nhật lịch trình thành công',
+  SCHEDULE_ID_NOT_EXISTED: 'Lịch trình không tồn tại',
+  DELETE_SCHEDULE_SUCCESS: 'Xóa lịch trình thành công',
+  SCHEDULE_ID_IS_REQUIRED: 'Lịch trình không được để trống',
+  SCHEDULE_ID_IS_STRING: 'Lịch trình phải là chuỗi'
+} as const
+
+export const ADMIN_MESSAGES = {
+  GET_ALL_USER_SUCCESS: 'Lấy tất cả người dùng thành công',
+  CREATE_USER_SUCCESS: 'Tạo người dùng thành công',
+  UPDATE_USER_SUCCESS: 'Cập nhật người dùng thành công',
+  USER_ID_IS_REQUIRED: 'ID người dùng không được để trống',
+  USER_ID_IS_STRING: 'ID người dùng phải là chuỗi',
+  GET_USER_SUCCESS: 'Lấy người dùng thành công',
+  DELETE_USER_SUCCESS: 'Xóa người dùng thành công',
+  GET_ALL_ROOM_SUCCESS: 'Lấy tất cả phòng thành công',
   DELETE_ROOM_SUCCESS: 'Xóa phòng thành công'
 } as const

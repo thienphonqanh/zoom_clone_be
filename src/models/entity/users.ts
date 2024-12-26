@@ -1,8 +1,7 @@
+import { Role } from '~/constants/enum'
 import { CreatedUpdated } from '../../common/createdUpdatedEntity'
-import { Room } from './room'
-import { Participants } from './participants'
+import { Rooms } from './rooms'
 import { ScheduledMeetings } from './scheduledMeetings'
-import { Messages } from './messages'
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 
 @Entity()
@@ -28,18 +27,12 @@ export class Users extends CreatedUpdated {
   @Column({ nullable: true, type: 'date' })
   dob?: Date
 
-  @Column({ nullable: true, default: 0, select: false })
-  role?: number
+  @Column({ nullable: true, default: Role.User, select: true })
+  role?: string
 
-  @OneToMany(() => Room, (room) => room.user)
-  room?: Room[]
-
-  @OneToMany(() => Participants, (participant) => participant.user)
-  participant?: Participants[]
+  @OneToMany(() => Rooms, (room) => room.user)
+  room?: Rooms[]
 
   @OneToMany(() => ScheduledMeetings, (scheduledMeeting) => scheduledMeeting.user)
   scheduledMeeting?: ScheduledMeetings[]
-
-  @OneToMany(() => Messages, (message) => message.user)
-  message?: Messages[]
 }

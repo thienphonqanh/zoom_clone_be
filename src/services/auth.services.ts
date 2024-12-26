@@ -1,4 +1,4 @@
-import { TokenType, UserVerifyStatus } from '~/constants/enum'
+import { Role, TokenType, UserVerifyStatus } from '~/constants/enum'
 import { dataSource } from '~/dataSource'
 import { RefreshToken } from '~/models/entity/refreshToken'
 import { Users } from '~/models/entity/users'
@@ -9,16 +9,19 @@ class AuthServices {
   private signAccessToken({
     user_id,
     user_name,
-    verify
+    verify,
+    role
   }: {
     user_id: string
     user_name: string
     verify: UserVerifyStatus
+    role: Role
   }) {
     return signToken({
       payload: {
         user_id,
         user_name,
+        role,
         token_type: TokenType.AccessToken,
         verify
       },
@@ -33,17 +36,20 @@ class AuthServices {
     user_id,
     user_name,
     verify,
+    role,
     remainingTime
   }: {
     user_id: string
     user_name: string
     verify: UserVerifyStatus
+    role: Role
     remainingTime?: number
   }) {
     return signToken({
       payload: {
         user_id,
         user_name,
+        role,
         token_type: TokenType.RefreshToken,
         verify
       },
@@ -57,24 +63,27 @@ class AuthServices {
   private signAccessAndRefreshToken({
     user_id,
     user_name,
-    verify
+    verify,
+    role
   }: {
     user_id: string
     user_name: string
     verify: UserVerifyStatus
+    role: Role
   }) {
     return Promise.all([
-      this.signAccessToken({ user_id, user_name, verify }),
-      this.signRefreshToken({ user_id, user_name, verify })
+      this.signAccessToken({ user_id, user_name, verify, role }),
+      this.signRefreshToken({ user_id, user_name, verify, role })
     ])
   }
 
-  async loginService({ id, name }: { id: number; name: string }) {
+  async loginService({ id, name, role }: { id: number; name: string; role: string }) {
     const [[accessToken, refreshToken], oldRefreshToken] = await Promise.all([
       await this.signAccessAndRefreshToken({
         user_id: id.toString(),
         user_name: name.toString() as string,
-        verify: UserVerifyStatus.Verrified
+        verify: UserVerifyStatus.Verrified,
+        role: role === Role.Admin ? Role.Admin : Role.User
       }),
       await dataSource
         .getRepository(RefreshToken)
@@ -111,7 +120,7 @@ class AuthServices {
     email: string
     password: string
     name: string
-    role: number
+    role: string
   }) {
     const firstUser = await dataSource
       .getRepository(Users)
@@ -156,12 +165,14 @@ class AuthServices {
         user_id: user_id.toString(),
         user_name,
         verify: UserVerifyStatus.Verrified,
-        remainingTime: remainingTimeRefreshToken
+        remainingTime: remainingTimeRefreshToken,
+        role: Role.User
       }),
       this.signAccessToken({
         user_id: user_id.toString(),
         user_name,
-        verify: UserVerifyStatus.Verrified
+        verify: UserVerifyStatus.Verrified,
+        role: Role.User
       })
     ])
     //replace old refresh token with new access token

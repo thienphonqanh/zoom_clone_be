@@ -10,7 +10,7 @@ export interface RegisterReqBody {
   email: string
   password: string
   name: string
-  role: number
+  role: string
 }
 
 export interface UpdateMeReqBody {

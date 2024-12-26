@@ -11,9 +11,14 @@ export enum TokenType {
   EmailVerifyToken
 }
 
+export enum Role {
+  User = 'User',
+  Admin = 'Admin'
+}
+
 export enum ScheduleStatus {
-  Scheduled,
-  Ongoing,
-  Completed,
-  Canceled
+  Scheduled = 'Scheduled',
+  Ongoing = 'Ongoing',
+  Completed = 'Completed',
+  Canceled = 'Canceled'
 }

@@ -2,7 +2,7 @@ import { StreamClient } from '@stream-io/node-sdk'
 import { v4 as uuidv4 } from 'uuid'
 import { ROOM_MESSAGES } from '~/constants/messages'
 import { dataSource } from '~/dataSource'
-import { Room } from '~/models/entity/room'
+import { Rooms } from '~/models/entity/rooms'
 import { Users } from '~/models/entity/users'
 
 class RoomServices {
@@ -20,7 +20,7 @@ class RoomServices {
     const room = await dataSource
       .createQueryBuilder()
       .insert()
-      .into(Room)
+      .into(Rooms)
       .values({
         name: roomId,
         user: user,
@@ -32,7 +32,7 @@ class RoomServices {
 
   async checkRoomIdService(roomId: string) {
     const result = await dataSource
-      .getRepository(Room)
+      .getRepository(Rooms)
       .createQueryBuilder('room')
       .where('room.name = :name', { name: roomId })
       .getOne()
@@ -46,7 +46,7 @@ class RoomServices {
     const result = await dataSource
       .createQueryBuilder()
       .delete()
-      .from(Room)
+      .from(Rooms)
       .where('name = :name', { name: roomId })
       .andWhere('userId = :userId', { userId })
       .execute()
