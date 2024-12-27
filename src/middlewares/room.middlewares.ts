@@ -16,7 +16,7 @@ export const checkRoomIdValidator = validate([
       const result = await dataSource
         .getRepository(Rooms)
         .createQueryBuilder('rooms')
-        .where('room.name = :name', { name: value })
+        .where('rooms.name = :name', { name: value })
         .getOne()
 
       if (!result) {
